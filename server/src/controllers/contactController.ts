@@ -26,6 +26,18 @@ const retrieveAllContacts: RequestHandler = async (req, res, next) => {
   }
 }
 
+const getContact: RequestHandler = async (req, res, next) => {
+  const _id = req.params.id
+
+  try {
+    const contact = await Contact.find({ _id })
+
+    res.status(200).send(contact)
+  } catch (error) {
+    res.status(400).send(error)
+  }
+}
+
 const updateContact: RequestHandler = async (req, res, next) => {
   try {
     const id = req.params.id
@@ -53,4 +65,10 @@ const deleteContact: RequestHandler = async (req, res, next) => {
   }
 }
 
-export { createContact, retrieveAllContacts, updateContact, deleteContact }
+export {
+  createContact,
+  retrieveAllContacts,
+  getContact,
+  updateContact,
+  deleteContact,
+}
