@@ -1,8 +1,10 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
-import { contactApiSlice } from '../features/contacts/api/contactApiSlice'
+import { configureStore } from '@reduxjs/toolkit'
+import globalReducer from 'features/global/api/globalSlice'
+import { contactApiSlice } from 'features/contacts/api/contactApiSlice'
 
 export const store = configureStore({
   reducer: {
+    globalState: globalReducer,
     [contactApiSlice.reducerPath]: contactApiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>

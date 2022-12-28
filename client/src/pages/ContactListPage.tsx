@@ -1,11 +1,10 @@
-import React from 'react'
-import ContactList from '../features/contacts/components/ContactList'
-import CreateContact from '../features/contacts/components/CreateContact'
+import ContactList from 'features/contacts/components/ContactList'
+import ContactForm from 'features/contacts/components/ContactForm'
 
 const ContactListPage = () => {
   return (
     <>
-      <CreateContact />
+      <ContactForm />
       <ContactList />
     </>
   )

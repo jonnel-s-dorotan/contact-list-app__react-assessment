@@ -1,4 +1,3 @@
-import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 
 import './App.css'
@@ -9,7 +8,7 @@ import ErrorPage from './pages/HttpErrorNotFoundPage'
 
 const App = () => {
   return (
-    <>
+    <div className='container p-8'>
       <Routes>
         <Route path='/'>
           <Route index element={<ContactListPage />} />
@@ -21,7 +20,7 @@ const App = () => {
           element={<Navigate to='/HttpErrorNotFoundPage' replace />}
         />
       </Routes>
-    </>
+    </div>
   )
 }
 
