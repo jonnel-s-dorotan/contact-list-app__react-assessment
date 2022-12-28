@@ -18,7 +18,7 @@ const createContact: RequestHandler = async (req, res, next) => {
 
 const retrieveAllContacts: RequestHandler = async (req, res, next) => {
   try {
-    const contacts = await Contact.find()
+    const contacts = await Contact.find().sort({ updatedAt: -1 })
 
     res.status(200).send(contacts)
   } catch (error) {

@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 
 import IContact from 'types/contactType'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
@@ -12,14 +14,40 @@ import {
 import Input from 'components/Input'
 import Button from 'components/Button'
 
+const schema = yup.object().shape({
+  name: yup
+    .string()
+    .matches(
+      /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/,
+      'must be valid person name'
+    )
+    .min(3, 'must be at least 3 characters')
+    .max(100, '100 characters limit reached')
+    .required(),
+  email: yup.string().email().required(),
+  contactNumber: yup
+    .string()
+    .matches(/^09\d{9}$/, 'must start with "09" and 11 digits')
+    .min(11, 'must be exactly 11 digits')
+    .max(11, 'must be exactly 11 digits')
+    .required(),
+})
+
 const CreateContact = () => {
   const { isUpdate, contactDetails } = useAppSelector(
     (state) => state.globalState
   )
   const dispatch = useAppDispatch()
 
-  const { register, setValue, handleSubmit, formState, reset } =
-    useForm<IContact>()
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<IContact>({
+    resolver: yupResolver(schema),
+  })
 
   const [createContact, { isSuccess, isError }] = useCreateContactMutation()
   const [updateContact] = useUpdateContactMutation()
@@ -69,16 +97,19 @@ const CreateContact = () => {
         placeholder='Enter your name.'
         register={register}
         registerParam='name'
+        error={errors.name?.message}
       />
       <Input
         placeholder='Enter your email address.'
         register={register}
         registerParam='email'
+        error={errors.email?.message}
       />
       <Input
         placeholder='Enter your contact Number.'
         register={register}
         registerParam='contactNumber'
+        error={errors.contactNumber?.message}
       />
 
       <div className='flex justify-between'>
