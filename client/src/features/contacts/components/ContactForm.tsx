@@ -44,6 +44,7 @@ const CreateContact = () => {
     setValue,
     handleSubmit,
     formState: { errors },
+    setFocus,
     reset,
   } = useForm<IContact>({
     resolver: yupResolver(schema),
@@ -53,11 +54,10 @@ const CreateContact = () => {
   const [updateContact] = useUpdateContactMutation()
 
   useEffect(() => {
-    if (!isUpdate) {
-      reset()
+    setFocus('name')
+    reset()
 
-      return
-    }
+    if (!isUpdate) return
 
     const { _id, name, email, contactNumber } = contactDetails
 
@@ -65,7 +65,7 @@ const CreateContact = () => {
     setValue('name', name)
     setValue('email', email)
     setValue('contactNumber', contactNumber)
-  }, [isUpdate, setValue, contactDetails, reset])
+  }, [isUpdate, contactDetails, setValue, setFocus, reset])
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -92,7 +92,10 @@ const CreateContact = () => {
   }
 
   return (
-    <form className='grid gap-6 mb-20 w-1/2' onSubmit={onSubmit}>
+    <form
+      className='grid gap-6 p-10 mb-20 lg:w-1/2 bg-slate-50 border-2 border-fmNeutralVeryDarkGrayishCyan rounded-xl shadow-lg'
+      onSubmit={onSubmit}
+    >
       <Input
         placeholder='Enter your name.'
         register={register}
@@ -115,14 +118,16 @@ const CreateContact = () => {
       <div className='flex justify-between'>
         <Button
           type='submit'
-          innerText={isUpdate ? 'Update' : 'Add'}
-          customClass='w-40'
+          bgColor={isUpdate ? 'bg-chGreen' : 'bg-chSage'}
+          innerText={isUpdate ? 'UPDATE' : 'ADD'}
+          customClass='lg:w-40'
         />
         {isUpdate && (
           <Button
             type='button'
-            innerText='Cancel'
-            customClass='w-40'
+            bgColor='bg-chPeach'
+            innerText='CANCEL'
+            customClass='lg:w-40'
             handleOnClick={handleCancelOnClick}
           />
         )}

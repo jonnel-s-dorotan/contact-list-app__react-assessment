@@ -30,13 +30,13 @@ const Input = ({
   focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5`
 
   if (error)
-    className = `bg-red-50 border border-red-500 text-red-900
-      placeholder-red-700 text-sm rounded-lg focus:ring-red-500
-      focus:border-red-500 block w-full p-2.5`
+    className = `bg-red-50 border border-chPeach text-chPeach
+      placeholder-chPeach text-sm rounded-lg focus:ring-chPeach
+      focus:border-chPeach block w-full p-2.5`
 
   return (
     <div>
-      <label className='block mb-2 text-sm font-medium text-gray-900 capitalize'>
+      <label className='block mb-2 text-sm font-medium text-fmNeutralVeryDarkGrayishCyan capitalize'>
         {labelText}
       </label>
       <input
@@ -46,7 +46,7 @@ const Input = ({
         autoComplete='off'
         {...register(registerParam)}
       ></input>
-      <p className='text-sm text-red-600'>{error}</p>
+      <p className='text-sm text-chPeach'>{error}</p>
     </div>
   )
 }

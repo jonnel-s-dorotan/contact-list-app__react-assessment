@@ -26,6 +26,12 @@ const globalSlice = createSlice({
       state.contactDetails = contactDetails
     },
     setInputsForUpdate(state, action: PayloadAction<IContact>) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'auto',
+      })
+
       state.isUpdate = true
       state.contactDetails = action.payload
     },

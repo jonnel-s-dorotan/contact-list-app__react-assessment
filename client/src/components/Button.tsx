@@ -1,5 +1,6 @@
 interface props {
   type?: 'button' | 'submit'
+  bgColor?: string
   innerText: string
   border?: string
   customClass?: string
@@ -8,6 +9,7 @@ interface props {
 
 const Button = ({
   type = 'button',
+  bgColor = 'bg-chSage',
   innerText,
   border = 'rounded-lg',
   customClass,
@@ -16,8 +18,7 @@ const Button = ({
   return (
     <button
       type={type}
-      className={`text-white bg-blue-700 hover:bg-blue-800
-        focus:ring-4 focus:outline-none focus:ring-blue-300
+      className={`text-fmNeutralVeryDarkGrayishCyan ${bgColor} hover:bg-fmPrimaryDesaturatedDarkCyan
         font-medium text-sm px-5 py-2.5 text-center ${border} ${customClass}`}
       onClick={handleOnClick}
     >
