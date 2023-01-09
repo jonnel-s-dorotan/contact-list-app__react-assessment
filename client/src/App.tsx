@@ -6,26 +6,35 @@ import ContactListPage from 'pages/ContactListPage'
 import ContactInfoPage from 'pages/ContactInfoPage'
 import HttpErrorNotFoundPage from 'pages/HttpErrorNotFoundPage'
 
+import Header from 'components/Header'
+import Container from 'components/Container'
+import Main from 'components/Main'
+import Footer from 'components/Footer'
+
 const App = () => {
   return (
-    <div className='min-h-screen bg-fmNeutralLightGrayishCyanBG'>
-      <div className='container mx-auto p-12'>
-        <Routes>
-          <Route path='/'>
-            <Route index element={<ContactListPage />} />
-            <Route path=':_id' element={<ContactInfoPage />} />
-          </Route>
-          <Route
-            path='/HttpErrorNotFoundPage'
-            element={<HttpErrorNotFoundPage />}
-          />
-          <Route
-            path='*'
-            element={<Navigate to='/HttpErrorNotFoundPage' replace />}
-          />
-        </Routes>
-      </div>
-    </div>
+    <>
+      <Header />
+      <Main>
+        <Container>
+          <Routes>
+            <Route path='/'>
+              <Route index element={<ContactListPage />} />
+              <Route path=':_id' element={<ContactInfoPage />} />
+            </Route>
+            <Route
+              path='/HttpErrorNotFoundPage'
+              element={<HttpErrorNotFoundPage />}
+            />
+            <Route
+              path='*'
+              element={<Navigate to='/HttpErrorNotFoundPage' replace />}
+            />
+          </Routes>
+        </Container>
+      </Main>
+      <Footer />
+    </>
   )
 }
 

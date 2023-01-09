@@ -1,4 +1,4 @@
-interface props {
+interface Props {
   type?: string
   placeholder: string
   register: any
@@ -6,13 +6,13 @@ interface props {
   error?: string
 }
 
-const Input = ({
+const InputGroup = ({
   type = 'text',
   placeholder,
   register,
   registerParam,
   error = '',
-}: props) => {
+}: Props) => {
   // const { onChange, onBlur, name, ref } = register(registerParam);
 
   let labelText = ''
@@ -30,25 +30,29 @@ const Input = ({
   focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5`
 
   if (error)
-    className = `bg-red-50 border border-chPeach text-chPeach
+    className = `bg-red-50 border border-red-600 text-red-600
       placeholder-chPeach text-sm rounded-lg focus:ring-chPeach
       focus:border-chPeach block w-full p-2.5`
 
   return (
     <div>
-      <label className='block mb-2 text-sm font-medium text-fmNeutralVeryDarkGrayishCyan capitalize'>
+      <label
+        htmlFor={registerParam}
+        className='block mb-2 text-lg text-fmNeutralVeryDarkGrayishCyan font-bold capitalize'
+      >
         {labelText}
       </label>
       <input
         type={type}
         className={className}
+        id={registerParam}
         placeholder={placeholder}
-        autoComplete='off'
+        autoComplete='on'
         {...register(registerParam)}
       ></input>
-      <p className='text-sm text-chPeach'>{error}</p>
+      <p className='text-sm text-red-600'>{error}</p>
     </div>
   )
 }
 
-export default Input
+export default InputGroup

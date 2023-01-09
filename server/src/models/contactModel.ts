@@ -10,6 +10,15 @@ const contactSchema: Schema = new Schema<IContact>(
     email: {
       type: String,
       required: true,
+      unique: true,
+      validate: {
+        validator: async (email: string) => {
+          const numDocs = await Contact.countDocuments({ email })
+
+          return numDocs === 0
+        },
+        message: 'Email already exists',
+      },
     },
     contactNumber: {
       type: String,
@@ -19,4 +28,6 @@ const contactSchema: Schema = new Schema<IContact>(
   { timestamps: true }
 )
 
-export default model<IContact>('Contact', contactSchema)
+const Contact = model<IContact>('Contact', contactSchema)
+
+export default Contact
